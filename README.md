@@ -1,69 +1,43 @@
-📡 Silent SMS Tracking Implementation in Python
+# Silent SMS Tracking System
 
-🚨 Attention
-This project provides a Python implementation for silent SMS tracking. This code is for educational purposes only. Using this technique to track devices without consent is illegal and unethical.
+This project implements a silent SMS tracking system that sends silent SMS messages to a target phone number, receives any SMS responses, and performs triangulation to estimate the target's location. The project is organized into several Python modules, each responsible for a specific aspect of the system.
 
-📖 Overview
-This repository demonstrates a basic implementation for sending silent SMS, collecting response data, and using that data to estimate the location of a device. While it is a simplified implementation, it covers the core concepts needed for silent SMS tracking.
-
-🛠️ Environment Setup
-bash
-Copy code
 pip install pygsm smpplib geopy
-🚀 Features
 
-1. Silent SMS Sending
-   Send silent SMS messages to a target phone number, without the recipient device displaying any notification.
+## Project Structure
 
-python
-Copy code
-import smpplib
-import smpplib.gsm
+```plaintext
+silent-sms-tracking/
+├── README.md
+├── send_sms.py
+├── receive_sms.py
+├── triangulation.py
+└── main.py
 
-def send_silent_sms(target_number, message=""): # Code to send silent SMS
-pass
 
-send_silent_sms("+1234567890") 2. SMS Data Reception and Processing
-Receive and process SMS response data using a GSM modem, essential for triangulation calculations.
 
-python
-Copy code
-import pygsm
+send_sms.py
+This module contains the function send_silent_sms which is responsible for sending silent SMS messages to a specified target number.
 
-def process_received_sms(modem): # Code to process received SMS
-pass
+receive_sms.py
+This module contains functions for receiving SMS messages using a GSM modem and processing the received data.
 
-modem = pygsm.GsmModem(port="/dev/ttyUSB0", baudrate=115200)
-modem.connect()
-process_received_sms(modem) 3. Basic Triangulation
-Implement basic triangulation using three cell towers to estimate the location of a device.
+triangulation.py
+This module performs basic triangulation using distances from three cell towers to estimate the location of the target.
 
-python
-Copy code
-from geopy import distance
+main.py
+The main script that ties everything together. It handles sending silent SMS messages, receiving responses, and performing triangulation.
 
-def triangulate(tower1, tower2, tower3, dist1, dist2, dist3): # Code for basic triangulation
-pass 4. Full Integration
-Integrate all functionalities into a main loop for continuous real-time tracking.
+Usage
+Sending Silent SMS:
 
-python
-Copy code
-import threading
-import time
+Use the send_silent_sms(target_number) function from send_sms.py to send a silent SMS to the target phone number.
+Receiving SMS Messages:
 
-def main(): # Code for the main loop
-pass
+The process_received_sms(modem) function from receive_sms.py is used to process any incoming SMS messages via a GSM modem.
+Triangulation:
 
-if **name** == "**main**":
-main()
-🎯 Example Usage
-Replace "+1234567890" with the target phone number and run the script:
+The triangulate function in triangulation.py is used to estimate the location of the target based on distances from three cell towers.
+Running the System:
 
-bash
-Copy code
-python silent_sms_tracking.py
-⚠️ Note
-This implementation is a simplified version for educational purposes. In a real scenario, significant improvements would be required, such as error handling, secure communication protocols, and integration with real cellular network infrastructures.
-
-📜 License
-Distributed under the MIT license. See LICENSE for more information.
+Run the main.py script to start the system. It will continuously send silent SMS messages and attempt to triangulate the target's location based on the received data.
